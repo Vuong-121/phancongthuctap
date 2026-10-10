@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Sinh Viên Thực Tập</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+<div class="container">
+    <div id="view-menu">
+        <div class="header-title">
+            <h3>Ứng dụng Quản lý Sinh viên Thực tập</h3>
+            <p>Cho phép quản lý giảng viên, sinh viên và báo cáo thực tập.</p>
+        </div>
+        <button class="btn-menu" onclick="showView('view-giangvien')">QUẢN LÝ GIẢNG VIÊN</button>
+        <button class="btn-menu" onclick="showView('view-sinhvien')">QUẢN LÝ SINH VIÊN</button>
+        <button class="btn-menu" onclick="showView('view-baocao')">BÁO CÁO - TRUY VẤN</button>
+    </div>
+
+    <div id="view-giangvien" class="hidden">
+        <button class="back-btn" onclick="showView('view-menu')">⬅ Quay lại Menu</button>
+        <h2>Quản Lý Giảng Viên</h2>
+        <div class="form-group">
+            <label>Mã Giảng viên</label>
+            <div style="display: flex; width: 68%;">
+                <input type="text" id="gv-ma" style="width: 70%;">
+                <button class="btn-small" style="margin-left: 5px;" onclick="timGV()">TÌM</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Tên Giảng viên</label>
+            <input type="text" id="gv-ten">
+        </div>
+        <div class="form-group">
+            <label>Năm sinh (Date)</label>
+            <input type="date" id="gv-namsinh">
+        </div>
+        <div class="form-group">
+            <label>Số năm kinh nghiệm</label>
+            <input type="number" id="gv-sonamkn">
+        </div>
+        <div class="btn-action-group">
+            <button class="btn-action" onclick="themGV()">THÊM GIẢNG VIÊN</button>
+            <button class="btn-action" onclick="suaGV()">SỬA GIẢNG VIÊN</button>
+            <button class="btn-action" onclick="xoaGV()">XÓA GIẢNG VIÊN</button>
+        </div>
+
+        <div class="table-container">
+            <h3>Danh sách Giảng viên</h3>
+            <table>
+                <thead>
+                    <tr><th>Mã GV</th><th>Tên GV</th><th>Năm Sinh</th><th>Năm KN</th></tr>
+                </thead>
+                <tbody id="table-gv"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="view-sinhvien" class="hidden">
+        <button class="back-btn" onclick="showView('view-menu')">⬅ Quay lại Menu</button>
+        <h2>Quản Lý Sinh Viên</h2>
+        <div class="form-group">
+            <label>Mã Sinh viên</label>
+            <div style="display: flex; width: 68%;">
+                <input type="text" id="sv-ma" style="width: 70%;">
+                <button class="btn-small" style="margin-left: 5px;" onclick="timSV()">TÌM</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Tên Sinh viên</label>
+            <input type="text" id="sv-ten">
+        </div>
+        <div class="form-group">
+            <label>Ngày sinh (yyyy-mm-dd)</label>
+            <input type="date" id="sv-ngaysinh">
+        </div>
+        <div class="form-group">
+            <label>Quê quán</label>
+            <input type="text" id="sv-quequan" list="danhsach-tinhthanh" placeholder="Nhập hoặc chọn tỉnh thành...">
+            <datalist id="danhsach-tinhthanh"></datalist>
+        </div>
+        <div class="form-group">
+            <label>GV Phụ trách</label>
+            <select id="sv-magv"></select>
+        </div>
+        <div class="btn-action-group">
+            <button class="btn-action" onclick="themSV()">THÊM SINH VIÊN</button>
+            <button class="btn-action" onclick="suaSV()">SỬA SINH VIÊN</button>
+            <button class="btn-action" onclick="xoaSV()">XÓA SINH VIÊN</button>
+        </div>
+
+        <div class="table-container">
+            <h3>Danh sách Sinh viên</h3>
+            <table>
+                <thead>
+                    <tr><th>Mã SV</th><th>Tên SV</th><th>Ngày Sinh</th><th>Quê Quán</th><th>Mã GV</th></tr>
+                </thead>
+                <tbody id="table-sv"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="view-baocao" class="hidden">
+        <button class="back-btn" onclick="showView('view-menu')">⬅ Quay lại Menu</button>
+        <h2>Báo Cáo - Truy Vấn</h2>
+        <div class="form-group">
+            <label>Nhập mã Giảng viên</label>
+            <input type="text" id="bc-magv" placeholder="Nhập mã GV để tìm kiếm...">
+        </div>
+        <div class="btn-action-group">
+            <button class="btn-action" onclick="lietKeSVTheoGV()">LIỆT KÊ SINH VIÊN THEO GV</button>
+            <button class="btn-action" onclick="timGVDacBiet()">TÌM GIẢNG VIÊN ĐẶC BIỆT</button>
+            <button class="btn-action" onclick="gvTren10Nam()">GV TRÊN 10 NĂM KINH NGHIỆM</button>
+        </div>
+
+        <div class="table-container" id="ketqua-baocao">
+        </div>
+    </div>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>
